@@ -31,44 +31,44 @@ Start:
 
 shapeL:
 	mov ah, 0Ch
-	mov cx, 40 						;suradnica X
-	mov dx, 40						;suradnica Y
-   	hornaStrana:
+	mov cx, 40 						;coordinate X
+	mov dx, 40						;coordinate Y
+   	upperSide:
 		inc cx
 		int 10h
 		cmp cx, 260d
-		jne hornaStrana
+		jne upperSide
 		mov ah, 0Ch		
-	dole:
+	down:
 		inc dx
 		int 10h
 		cmp dx, 140d
-		jne dole
-	dolava:
+		jne down
+	left:
 		
 		dec cx
 		int 10h
 		cmp cx, 175d
-		jne dolava
-	dolavaHore:
+		jne left
+	leftUp:
 		
 		dec dx
 		dec cx
 		int 10h
 		cmp dx, 90
-		jne dolavaHore
-	dolava2:
+		jne leftUp
+	left2:
 		
 		dec cx
 		int 10h
 		cmp cx, 40
-		jne dolava2
-	hore:
+		jne left2
+	up:
 		
 		dec dx
 		int 10h
 		cmp dx, 40
-		jne hore
+		jne up
 	
 	call delay
 	inc al
@@ -98,35 +98,35 @@ mov color, al
 Triangle:	
 	mov al, color 						;color
 	mov ah, 0Ch
-	mov cx, triangleX 					;suradnica X
-	mov dx, triangleY 					;suradnica Y
+	mov cx, triangleX 					;coordinate X
+	mov dx, triangleY 					;coordinate Y
 	
-	kratsia:
+	shorter:
 		inc dx
 		int 10h
 		inc dx
 		dec cx
 		int 10h
 		cmp cx, 150d
-		jne kratsia	
+		jne shorter	
 	
-	prepona:
+	hypotenuse:
 		dec dx
 		int 10h
 		dec cx
 		int 10h
 		cmp dx, triangleY
-		jne prepona
-		jmp dlhsia
+		jne hypotenuse
+		jmp longer
 	
 endprogram:
 jmp endprogram2
 
-	dlhsia:			
+	longer:			
 		inc cx
 		int 10h
 		cmp cx, triangleX
-		jne dlhsia
+		jne longer
 		
 	dec triangleX 						;decrease triangle size
 	inc color							;change color
@@ -153,8 +153,8 @@ Rektangle:
 	call delay
 	call delay							;keep pyramid on screen for a while
 	call clrscr
-	mov startX, 10d						;dolava-doprava
-	mov startY, 50d						;hore-dole
+	mov startX, 10d						;left-right
+	mov startY, 50d						;up-down
 	mov endX, 20d						;ending point X
 	mov endY, 150d						;ending point Y
 	mov al, color
